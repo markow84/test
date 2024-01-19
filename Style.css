@@ -1,0 +1,207 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('Tło_strony.JPG'); 
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #b0b0b0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #aaaaaa;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #454545;
+}
+
+header {
+    background-color: rgba(17, 17, 17, 0.9); 
+    padding: 1em;
+    text-align: center;
+}
+header img {
+    height:10%;
+    width:10%;
+}
+
+nav {
+    background-color: #292929;
+    padding: 0.5em;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1em;
+    margin: 0.1px;
+    font-weight: bold;
+}
+
+section {
+    padding: 12px;
+    background-color: rgba(45, 45, 45, 0.8); 
+    color: #b0b0b0;
+    text-align:center;
+    border: 1px solid #0000009d;
+    background-color:rgba(17, 17, 17, 0,9);
+}
+section img  {
+    float:left;
+    border-radius: 10px;
+    height:30%;
+    width:70%;
+}
+
+
+
+footer {
+    background-color: rgba(17, 17, 17, 0.923); 
+    color: #fff;
+    text-align: center;
+    padding: 0.1px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#Trauma {
+    width: 350px;
+    height: 200px; 
+    padding: 100px;
+    text-align: center;
+    border: 2px solid #0000009d; 
+    background-color: rgba(17, 17, 17, 0.9);  
+    float: left;
+    margin-left: 75px;
+    margin-top:25px;
+    border-radius: 10px; 
+    color: #fff;  
+}
+
+#Trauma img {
+    width:20%;
+    height:auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#Cyber {
+    width: 350px;
+    height: 200px; 
+    padding: 100px;
+    text-align: center;
+    border: 2px solid #0000009d; 
+    background-color: rgba(17, 17, 17, 0.9); 
+    float: right;
+    margin-right:75px;
+    margin-top:25px;
+    border-radius: 10px; 
+    color: #fff; 
+}
+#Cyber img {
+    width:25%;
+    height:30%;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#Korpo {
+    width: 350px;
+    height: 200px; 
+    padding: 100px;
+    text-align: center;
+    border: 2px solid #0000009d; 
+    background-color: rgba(17, 17, 17, 0.9); 
+    float: right;
+    margin-right: 75px;
+    margin-top:50px;
+    border-radius: 10px; 
+    color: #fff; 
+}
+#Korpo img {
+    width:25%;
+    height:25%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#Loty {
+    width: 350px;
+    height: 200px; 
+    padding: 100px;
+    text-align: center;
+    border: 2px solid #0000009d; 
+    background-color: rgba(17, 17, 17, 0.9); 
+    float: left;
+    margin-left: 75px;
+    margin-top:50px;
+    border-radius: 10px; 
+    color: #fff; 
+}
+#Loty img {
+    width:20%;
+    height:auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.gallery-item {
+    flex-basis: calc(33% - 20px);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.gallery-item p {
+    text-align: center;
+    color: #fff;
+    margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+    .gallery-item {
+        flex-basis: calc(50% - 20px);
+    }
+}
+
+.zdjecia img{
+    float:left;
+    border-radius:5px;
+    border:2px solid;
+    height:25%;
+    width:50%;
+}
+
+.tekst {
+    background-color: rgba(17, 17, 17, 0.9); 
+    border-radius:15px;
+    overflow-wrap:normal;
+
+}
