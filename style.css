@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../Tło_strony.JPG'); 
+    background-image: url('/Tło_strony.JPG'); 
     background-size: cover;
     height: 100vh;
     background-position: center;
