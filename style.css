@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    padding-top: 60px;
 }
 
 header {
@@ -10,9 +11,14 @@ header {
     color: white;
     text-align: center;
     padding: 1rem;
-    display: block;
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed; /* Utrzymuje nagłówek na górze */
+    width: 100%; /* Rozciąga nagłówek na całą szerokość */
+    top: 0; /* Ustawia nagłówek na górze strony */
+    left: 0; /* Ustawia nagłówek na lewej stronie */
+    z-index: 1000; /* Zapewnia, że nagłówek jest zawsze na wierzchu */
 }
 
 header .logo {
