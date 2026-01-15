@@ -45,6 +45,7 @@ import pl.endixon.sectors.paper.sector.SectorTeleport;
 import pl.endixon.sectors.paper.task.*;
 import pl.endixon.sectors.paper.user.listeners.*;
 import pl.endixon.sectors.paper.user.profile.UserProfileCache;
+import pl.endixon.sectors.paper.user.profile.UserProfileRepository;
 import pl.endixon.sectors.paper.util.LoggerUtil;
 
 @Getter
@@ -95,6 +96,14 @@ public class PaperSector extends JavaPlugin {
     public void onDisable() {
         PacketSectorDisconnected packet = new PacketSectorDisconnected(this.sectorManager.getCurrentSectorName());
         Common.getInstance().getNatsManager().publish(PacketChannel.PACKET_SECTOR_DISCONNECTED.getSubject(), packet);
+
+        var currentSector = this.sectorManager.getCurrentSector();
+        if (currentSector != null && currentSector.getType() != SectorType.QUEUE) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                UserProfileRepository.getUser(player)
+                        .ifPresent(profile -> profile.updateAndSave(player, currentSector, false));
+            }
+        }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.kick(Component.text("§cSektor " + sectorManager.getCurrentSectorName() + " §czostał zamknięty i jest niedostępny!"));
