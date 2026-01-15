@@ -296,6 +296,7 @@ public class UserProfile {
     private void teleportPlayerToStoredLocation(@NonNull Player player) {
         long now = System.currentTimeMillis();
         Location targetLoc = new Location(player.getWorld(), x, y, z, yaw, pitch);
+        targetLoc = ensureLocationInCurrentSector(player, targetLoc);
 
         if (now < transferOffsetUntil) {
             Vector direction = targetLoc.getDirection().setY(0).normalize();
@@ -303,6 +304,41 @@ public class UserProfile {
         }
         player.teleport(targetLoc);
         startProtectionTask(player);
+    }
+
+    private Location ensureLocationInCurrentSector(@NonNull Player player, @NonNull Location targetLoc) {
+        Sector current = PaperSector.getInstance().getSectorManager().getCurrentSector();
+        if (current == null || current.isInSector(targetLoc)) {
+            return targetLoc;
+        }
+
+        int minX = Math.min(current.getFirstCorner().getPosX(), current.getSecondCorner().getPosX());
+        int maxX = Math.max(current.getFirstCorner().getPosX(), current.getSecondCorner().getPosX());
+        int minZ = Math.min(current.getFirstCorner().getPosZ(), current.getSecondCorner().getPosZ());
+        int maxZ = Math.max(current.getFirstCorner().getPosZ(), current.getSecondCorner().getPosZ());
+
+        double clampedX = Math.min(Math.max(targetLoc.getX(), minX + 1), maxX - 1);
+        double clampedZ = Math.min(Math.max(targetLoc.getZ(), minZ + 1), maxZ - 1);
+        if (minX + 1 > maxX - 1) {
+            clampedX = Math.min(Math.max(targetLoc.getX(), minX), maxX);
+        }
+        if (minZ + 1 > maxZ - 1) {
+            clampedZ = Math.min(Math.max(targetLoc.getZ(), minZ), maxZ);
+        }
+
+        int safeY = player.getWorld().getHighestBlockYAt((int) Math.floor(clampedX), (int) Math.floor(clampedZ)) + 1;
+        int maxY = player.getWorld().getMaxHeight() - 2;
+        if (safeY > maxY) {
+            safeY = maxY;
+        }
+
+        Location safeLocation = new Location(player.getWorld(), clampedX, safeY, clampedZ, targetLoc.getYaw(), targetLoc.getPitch());
+        LoggerUtil.warn(String.format("Stored location for '%s' was outside sector '%s'. Clamping to %s.",
+                player.getName(),
+                current.getName(),
+                safeLocation));
+        setLocationAndSave(safeLocation);
+        return safeLocation;
     }
 
     public void startProtectionTask(Player player) {
@@ -330,4 +366,3 @@ public class UserProfile {
         }.runTaskTimer(PaperSector.getInstance(), 0, 1);
     }
 }
-
