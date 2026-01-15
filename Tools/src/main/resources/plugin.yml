@@ -1,0 +1,38 @@
+name: EndSectors-Tools
+version: 1.7.4
+main: pl.endixon.sectors.tools.EndSectorsToolsPlugin
+api-version: 1.20
+depend: [EndSectors, Vault]
+author: Endixon
+
+commands:
+  randomtp:
+    description: Teleportuje gracza w losowe koordynaty.
+    aliases: [rtp]
+  spawn:
+    description: Teleportuje gracza na spawn sektor.
+  afk:
+    description: Teleportuje gracza na afk sektor.
+  home:
+    description: Zarzadzanie domami gracza.
+  market:
+    description: Glowna komenda rynku (przeglądanie).
+    aliases: [ah, rynek, aukcje]
+    usage: /market
+  wystaw:
+    description: Wystawianie przedmiotu na rynek.
+    aliases: [sell, sprzedaj, wystawprzedmiot]
+    usage: /wystaw <cena> <ilosc>
+  balance:
+    description: Sprawdz stan konta lub zarzadzaj finansami.
+    aliases: [bal, money, eco, portfel]
+    usage: /balance [gracz|pay|set|add|take]
+  plecak:
+    description: Otwiera wirtualny plecak gracza (synchronizacja miedzy sektorami).
+    aliases: [backpack, bp, sakwa]
+    usage: /plecak
+  bpadmin:
+    description: Administracyjne zarzadzanie plecakami graczy (online/offline).
+    aliases: [backpackadmin, adminplecak, bpview]
+    permission: endsectors.backpack.admin
+    usage: /bpadmin <nick/uuid>
