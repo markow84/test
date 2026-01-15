@@ -80,6 +80,9 @@ public class PlayerTeleportListener implements Listener {
             LoggerUtil.info(() -> "Teleport aborted: currentSector or targetSector is null for player " + player.getName() + ". Current location: " + player.getLocation() + ", Target location: " + to);
             return;
         }
+        if (currentSector.equals(targetSector)) {
+            return;
+        }
         if (targetSector.getType() == SectorType.SPAWN) {
             targetSector = sectorManager.find(SectorType.SPAWN);
         }

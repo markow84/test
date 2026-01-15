@@ -54,7 +54,11 @@ public class PacketUserCheckProxyListener implements PacketListener<PacketUserCh
 
         cache.setExists(username, true);
 
-        String resolvedSector = this.resolveSector(username, cache, userProfileCache);
+        String resolvedSector = this.resolveSectorFromPacket(packet, username, cache, userProfileCache);
+
+        if (resolvedSector == null) {
+            resolvedSector = this.resolveSector(username, cache, userProfileCache);
+        }
 
         if (resolvedSector == null) {
             resolvedSector = this.sectorManager.getRandomNonQueueSector()
@@ -77,6 +81,17 @@ public class PacketUserCheckProxyListener implements PacketListener<PacketUserCh
         VelocitySectorPlugin.getInstance().getServer()
                 .getPlayer(username)
                 .ifPresent(sectorQueue::addPlayer);
+    }
+
+    private String resolveSectorFromPacket(PacketUserCheck packet, String username, UserFlagCache cache, UserProfileCache redis) {
+        String sectorFromPacket = packet.getLastSector();
+        if (!this.isValid(sectorFromPacket)) {
+            return null;
+        }
+
+        cache.setLastSector(username, sectorFromPacket);
+        redis.setSectorName(username, sectorFromPacket);
+        return sectorFromPacket;
     }
 
     private String resolveSector(String username, UserFlagCache cache, UserProfileCache redis) {
